@@ -1,6 +1,7 @@
 package BTVN_B2;
-class Hello{
+
+public class Hello2 {
     public static void main(String[] args) {
-        System.out.println("Hello");
+        System.out.println("test git");
     }
 }
