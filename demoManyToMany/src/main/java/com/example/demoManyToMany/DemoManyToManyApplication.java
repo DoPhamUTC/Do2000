@@ -19,6 +19,11 @@ public class DemoManyToManyApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(DemoManyToManyApplication.class, args);
 	}
+	@Autowired
+	OutBillRepository outBillRepository;
+
+	@Autowired
+	ProductRepository productRepository;
 
 	@Autowired
 	DetaiOutBillRepository detaiOutBillRepository;
@@ -31,9 +36,33 @@ public class DemoManyToManyApplication implements CommandLineRunner{
 		OutBill outBill1 = new OutBill("ok",10);
 		OutBill outBill2 = new OutBill("finished",3);
 
-		DetailOutBill detailOutBill1 = new DetailOutBill(outBill1,product1);
-		DetailOutBill detailOutBill2 = new DetailOutBill(outBill2,product3);
-        detaiOutBillRepository.save(detailOutBill1);
+		DetailOutBill detailOutBill = new DetailOutBill();
+		detailOutBill.setOutBill(outBill1);
+		detailOutBill.setProduct(product1);
+		detailOutBill.setAmount(product1.getAmount());
+		product1.getDetailOutBills().add(detailOutBill);
+
+		DetailOutBill detailOutBill2 = new DetailOutBill();
+		detailOutBill.setOutBill(outBill2);
+		detailOutBill.setProduct(product1);
+		detailOutBill.setAmount(product1.getAmount());
+		product1.getDetailOutBills().add(detailOutBill2);
+
+		DetailOutBill detailOutBill3 = new DetailOutBill();
+		detailOutBill.setOutBill(outBill2);
+		detailOutBill.setProduct(product2);
+		detailOutBill.setAmount(product2.getAmount());
+		product1.getDetailOutBills().add(detailOutBill3);
+
+		outBillRepository.save(outBill1);
+		outBillRepository.save(outBill2);
+
+		productRepository.save(product1);
+		productRepository.save(product2);
+
+		detaiOutBillRepository.save(detailOutBill);
 		detaiOutBillRepository.save(detailOutBill2);
+		detaiOutBillRepository.save(detailOutBill3);
+
 	}
 }

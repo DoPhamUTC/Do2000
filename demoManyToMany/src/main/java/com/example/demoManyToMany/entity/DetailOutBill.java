@@ -18,7 +18,7 @@ public class DetailOutBill {
     @JoinColumn(name = "id_product")
     private Product product;
 
-    private int amount =product.getAmount();
+    private int amount ;
 
     public OutBill_ProductKey getId() {
         return id;
